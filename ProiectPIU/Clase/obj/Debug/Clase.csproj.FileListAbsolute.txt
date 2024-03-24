@@ -1,0 +1,14 @@
+C:\Users\x\source\repos\Clase\obj\Debug\Clase.csproj.AssemblyReference.cache
+C:\Users\x\source\repos\Clase\obj\Debug\Clase.csproj.CoreCompileInputs.cache
+C:\Users\x\source\repos\Clase\bin\Debug\Clase.dll.config
+C:\Users\x\source\repos\Clase\bin\Debug\Clase.dll
+C:\Users\x\source\repos\Clase\bin\Debug\Clase.pdb
+C:\Users\x\source\repos\Clase\obj\Debug\Clase.dll
+C:\Users\x\source\repos\Clase\obj\Debug\Clase.pdb
+C:\Users\x\source\repos\ProiectPIU\Clase\bin\Debug\Clase.dll.config
+C:\Users\x\source\repos\ProiectPIU\Clase\bin\Debug\Clase.dll
+C:\Users\x\source\repos\ProiectPIU\Clase\bin\Debug\Clase.pdb
+C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.csproj.AssemblyReference.cache
+C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.csproj.CoreCompileInputs.cache
+C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.dll
+C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.pdb
