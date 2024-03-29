@@ -26,7 +26,7 @@ public class Medicament
 
 public class Vanzare
 {
-    //TEMA LABORATOR 3 (Proprietati auto-implemented)
+    //TEMA LABORATOR 3 si 4 (Proprietati auto-implemented pentru a doua entitate)
     public int IdVanzare { get; set; }
     public int IdMedicament { get; set; }
     public int Cantitate { get; set; }
