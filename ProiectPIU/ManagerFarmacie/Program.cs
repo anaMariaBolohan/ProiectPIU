@@ -4,7 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        //TEMA LABORATOR 3
+        //TEMA LABORATOR 3 SI LABORATOR 4
 
 
         Medicament[] inventarMedicamente = new Medicament[10]; // Vector pentru stocarea medicamentelor
@@ -54,7 +54,7 @@ class Program
             }
         }
     }
-
+    //Adaugare medicament in vector
     static void AdaugaMedicament(Medicament[] inventarMedicamente)
     {
         Console.WriteLine("Introduceti detalii pentru un medicament:");
@@ -69,7 +69,6 @@ class Program
         Console.Write("Stoc disponibil: ");
         int stoc = Convert.ToInt32(Console.ReadLine());
 
-        // Cautăm prima poziție liberă în vectorul de medicamente
         int index = GasesteIndexLiber(inventarMedicamente);
         if (index != -1)
         {
@@ -94,7 +93,7 @@ class Program
         return -1; // Dacă nu găsim nicio poziție liberă, returnăm -1
     }
 
-
+    //Afisare medicamente din vector
     static void AfiseazaStocMedicamente(Medicament[] inventarMedicamente)
     {
         Console.WriteLine("Medicamente in stoc:");
@@ -106,7 +105,7 @@ class Program
             }
         }
     }
-
+    //Cautare medicamente dupa ID din vector
     static void CautaMedicament(Medicament[] inventarMedicamente)
     {
         Console.Write("Introduceti ID-ul medicamentului pentru a căuta: ");
@@ -130,6 +129,7 @@ class Program
         }
     }
 
+    //Adaugare vanzare in vector
     static void AdaugaVanzare(Vanzare[] listaVanzari)
     {
         Console.WriteLine("Introduceti detalii pentru o vanzare:");
@@ -154,6 +154,7 @@ class Program
             Console.WriteLine("Nu mai este spațiu în listă pentru a adăuga vânzări noi!");
         }
     }
+    //Afisare Vanzari din vector
     static void AfiseazaListaVanzari(Vanzare[] listaVanzari)
     {
         Console.WriteLine("Lista de vânzări:");
@@ -165,7 +166,7 @@ class Program
             }
         }
     }
-
+    //Cautare vanzare dupa ID din vector
     static void CautaVanzare(Vanzare[] listaVanzari)
     {
         Console.Write("Introduceti ID-ul vânzării pentru a căuta: ");
