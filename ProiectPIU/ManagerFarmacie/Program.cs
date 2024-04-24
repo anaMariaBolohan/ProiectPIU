@@ -1,4 +1,6 @@
 ﻿using System;
+using ManagerFisier;
+using System.Configuration;
 
 class Program
 {
@@ -6,9 +8,22 @@ class Program
     {
         //TEMA LABORATOR 3 SI LABORATOR 4
 
+        string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
+        string locatieFisierSolutie = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        // setare locatie fisier in directorul corespunzator solutiei
+        // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
+        string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
 
+        string fisier = "C:\\Users\\x\\Desktop\\ProiectPIU\\ProiectPIU";
         Medicament[] inventarMedicamente = new Medicament[10]; // Vector pentru stocarea medicamentelor
         Vanzare[] listaVanzari = new Vanzare[10]; // Vector pentru stocarea vânzărilor
+        AdministrareMedicamente_FisierText managerFisier = new AdministrareMedicamente_FisierText(caleCompletaFisier);
+
+        int nrMedicamente = 0;
+
+        Medicament medicamentNou = new Medicament();
+
+        managerFisier.GetMedicamente(out nrMedicamente);
 
         bool continuare = true;
         while (continuare)
@@ -20,14 +35,16 @@ class Program
             Console.WriteLine("4. Adăugare vânzare");
             Console.WriteLine("5. Afisare lista de vânzări");
             Console.WriteLine("6. Căutare vânzare");
-            Console.WriteLine("7. Exit");
+            Console.WriteLine("7. Salvare medicament in Fisier");
+            Console.WriteLine("8. Afisare medicament in Fisier");
+            Console.WriteLine("9. Exit");
             Console.Write("Selectati opțiunea: ");
             string optiune = Console.ReadLine();
 
             switch (optiune)
             {
                 case "1":
-                    AdaugaMedicament(inventarMedicamente);
+                    medicamentNou = AdaugaMedicament(inventarMedicamente);
                     break;
                 case "2":
                     AfiseazaStocMedicamente(inventarMedicamente);
@@ -45,6 +62,18 @@ class Program
                     CautaVanzare(listaVanzari);
                     break;
                 case "7":
+                    managerFisier.AddMedicament(medicamentNou);
+
+                    break;
+                case "8":
+                    Medicament[] medicamente = managerFisier.GetMedicamente(out nrMedicamente);
+                    foreach(Medicament medicament in medicamente)
+                    {
+                        medicament.AfiseazaDetalii();
+                    }
+                    break;
+
+                case "9":
                     Console.WriteLine("La revedere!");
                     continuare = false;
                     break;
@@ -55,7 +84,7 @@ class Program
         }
     }
     //Adaugare medicament in vector
-    static void AdaugaMedicament(Medicament[] inventarMedicamente)
+    static Medicament AdaugaMedicament(Medicament[] inventarMedicamente)
     {
         Console.WriteLine("Introduceti detalii pentru un medicament:");
         Console.Write("ID: ");
@@ -68,17 +97,20 @@ class Program
         decimal pret = Convert.ToDecimal(Console.ReadLine());
         Console.Write("Stoc disponibil: ");
         int stoc = Convert.ToInt32(Console.ReadLine());
-
+        Medicament medicamentOut = new Medicament();
         int index = GasesteIndexLiber(inventarMedicamente);
         if (index != -1)
         {
             Medicament medicament = new Medicament(id, nume, descriere, pret, stoc);
+            medicamentOut.copyMedicament(medicament);
             inventarMedicamente[index] = medicament;
         }
         else
         {
             Console.WriteLine("Nu mai este spațiu în stoc pentru a adăuga medicamente noi!");
         }
+
+        return medicamentOut;
     }
 
     static int GasesteIndexLiber<T>(T[] listaObiecte)
@@ -189,4 +221,6 @@ class Program
             Console.WriteLine($"Vânzarea cu ID-ul {idVanzareCautata} nu a fost găsită.");
         }
     }
+
+    
 }

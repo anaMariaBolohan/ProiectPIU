@@ -1,0 +1,15 @@
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\ManagerFarmacieGUI.exe.config
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\ManagerFarmacieGUI.exe
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\ManagerFarmacieGUI.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\Clase.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\ManagerFisier.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\Clase.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\Clase.dll.config
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\ManagerFisier.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\bin\Debug\ManagerFisier.dll.config
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\obj\Debug\ManagerFarmacieGUI.csproj.AssemblyReference.cache
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\obj\Debug\ManagerFarmacieGUI.Properties.Resources.resources
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\obj\Debug\ManagerFarmacieGUI.csproj.GenerateResource.cache
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\obj\Debug\ManagerFarmacieGUI.csproj.CoreCompileInputs.cache
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\obj\Debug\ManagerFarmacieGUI.exe
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacieGUI\obj\Debug\ManagerFarmacieGUI.pdb

@@ -1,0 +1,11 @@
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\bin\Debug\ManagerFisier.dll.config
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\bin\Debug\ManagerFisier.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\bin\Debug\ManagerFisier.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\bin\Debug\Clase.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\bin\Debug\Clase.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\bin\Debug\Clase.dll.config
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\obj\Debug\ManagerFisier.csproj.AssemblyReference.cache
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\obj\Debug\ManagerFisier.csproj.CoreCompileInputs.cache
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\obj\Debug\ManagerFisier.csproj.CopyComplete
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\obj\Debug\ManagerFisier.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFisier\obj\Debug\ManagerFisier.pdb

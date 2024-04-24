@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\Clase\Clase.csproj">
       <Project>{2d195a48-f0ec-4c71-800e-b4a7da48bda4}</Project>
       <Name>Clase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ManagerFisier\ManagerFisier.csproj">
+      <Project>{4cdf65bf-2350-45ca-a241-b08b7be2f62d}</Project>
+      <Name>ManagerFisier</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

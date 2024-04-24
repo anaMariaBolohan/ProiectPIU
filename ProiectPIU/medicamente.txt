@@ -1,0 +1,4 @@
+1$nurofen$durere$35$100
+2$Paracetamol$durere$7$150
+3$Biomicin Forte$Antibiotic$23$68
+4$Decasept$infectie gat$13$56

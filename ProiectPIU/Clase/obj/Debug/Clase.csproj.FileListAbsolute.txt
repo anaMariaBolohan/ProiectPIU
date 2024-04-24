@@ -12,3 +12,9 @@ C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.csproj.AssemblyReferenc
 C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.csproj.CoreCompileInputs.cache
 C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.dll
 C:\Users\x\source\repos\ProiectPIU\Clase\obj\Debug\Clase.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\Clase\bin\Debug\Clase.dll.config
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\Clase\bin\Debug\Clase.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\Clase\bin\Debug\Clase.pdb
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\Clase\obj\Debug\Clase.csproj.CoreCompileInputs.cache
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\Clase\obj\Debug\Clase.dll
+C:\Users\x\Desktop\ProiectPIU\ProiectPIU\Clase\obj\Debug\Clase.pdb
