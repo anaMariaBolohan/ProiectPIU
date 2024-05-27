@@ -1,7 +1,7 @@
 ﻿
 namespace ManagerFarmacieGUI
 {
-    partial class Form1
+    partial class ModificaMedicament
     {
         /// <summary>
         /// Required designer variable.
@@ -32,11 +32,9 @@ namespace ManagerFarmacieGUI
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Text = "Form1";
         }
 
         #endregion
     }
 }
-

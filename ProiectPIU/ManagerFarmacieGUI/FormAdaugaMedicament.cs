@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using System.Diagnostics.Eventing.Reader;
 using ManagerFisier;
 using System.Configuration;
-
+using Clase;
 
 namespace ManagerFarmacieGUI
 {
-    public partial class Form1 : Form
+    public partial class FormAdaugaMedicament : Form
     {
         AdministrareMedicamente_FisierText adminMedicament;
 
@@ -22,34 +22,29 @@ namespace ManagerFarmacieGUI
 
         public object ColorScheme { get; private set; }
         public object Office2010Theme { get; private set; }
+        
 
-        private Label lblsID;
-        private Label lblsNume;
-        private Label lblsDescriere;
-        private Label lblsPret;
-        private Label lblsStocDisponibil;
 
-        private Label[] lblID;
-        private Label[] lblNume;
-        private Label[] lblDescriere;
-        private Label[] lblPret;
-        private Label[] lblStocDisponibil;
         private Label lblAdaugareMedicament;
 
         private Label lblNumeInput;
         private Label lblDescriereInput;
         private Label lblPretInput;
         private Label lblStocDisponibilInput;
+        private Label lblVarstaInput;
 
         private TextBox txtNumeInput;
-        private TextBox txtDescriereInput;
         private TextBox txtPretInput;
         private TextBox txtStocDisponibilInput;
+
+        private RadioButton cbVarstaInput;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
 
         //label pt validare
         private Label lblNumeNou;
         private Label lblDescriereNou;
-        private Label lblPretNou;
+        private Label lblpretnou;
         private Label lblStocNou;
         private Label lblNumeMedicamentNou;
 
@@ -58,7 +53,11 @@ namespace ManagerFarmacieGUI
         private const int LATIME_DEFAULT = 80;
 
 
-        public Form1()
+        Enumerari.CaracteristiciMedicament selectedEnum = Enumerari.CaracteristiciMedicament.None;
+        List<Enumerari.CategorieMedicament> selectedEnums = new List<Enumerari.CategorieMedicament>();
+
+
+        public FormAdaugaMedicament()
         {
             InitializeComponent();
 
@@ -73,63 +72,15 @@ namespace ManagerFarmacieGUI
             Medicament[] medicamente = adminMedicament.GetMedicamente(out nrMedicamente);
 
             //setare proprietati
-            this.Size = new Size(850, 300);
+            this.Size = new Size(450, 550);
             this.StartPosition = manual;
             this.BackColor = Color.White;
-            //this.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            //this.WindowState = FormWindowState.Maximized;
             this.Location = new Point(100, 100);
             this.Font = new Font("Arial", 9, FontStyle.Bold);
             this.StartPosition = FormStartPosition.CenterScreen; //centreaza forma in cadrul ecranului
             this.ForeColor = Color.DarkCyan;
             this.Text = "Informatii medicamente";
            
-            //adaugare control de tip label pentru 'ID'
-            lblsID = new Label();
-            lblsID.Width = LATIME_DEFAULT - 40;
-            lblsID.Top = 20;
-            lblsID.Left = 460;
-            lblsID.Text = "ID";
-            lblsID.Font = new Font("Arial", 10, FontStyle.Bold);
-            this.Controls.Add(lblsID);
-
-            //adaugare control de tip label pentru 'Nume'
-            lblsNume = new Label();
-            lblsNume.Width = LATIME_DEFAULT + 50;
-            lblsNume.Top = 20;
-            lblsNume.Left = lblsID.Left + LATIME_DEFAULT -30 ;
-            lblsNume.Text = "Nume";
-            lblsNume.Font = new Font("Arial", 10, FontStyle.Bold);
-            this.Controls.Add(lblsNume);
-
-            //adaugare control de tip label pentru 'Descriere'
-            lblsDescriere = new Label();
-            lblsDescriere.Width = LATIME_DEFAULT + 60;
-            lblsDescriere.Text = "Descriere";
-            lblsDescriere.Top = 20;
-            lblsDescriere.Left = lblsNume.Left + LATIME_DEFAULT + 60;
-            lblsDescriere.Font = new Font("Arial", 10, FontStyle.Bold);
-            this.Controls.Add(lblsDescriere);
-
-            //adaugare control de tip label pentru 'Pret'
-            lblsPret = new Label();
-            lblsPret.Width = LATIME_DEFAULT - 20;
-            lblsPret.Text = "Pret";
-            lblsPret.Top = 20;
-            lblsPret.Left = lblsDescriere.Left + LATIME_DEFAULT + 70;
-            lblsPret.Font = new Font("Arial", 10, FontStyle.Bold);
-            this.Controls.Add(lblsPret);
-
-            //adaugare control de tip label pentru 'Stoc Disponibil'
-            lblsStocDisponibil = new Label();
-            lblsStocDisponibil.Width = LATIME_DEFAULT - 20;
-            lblsStocDisponibil.Text = "Stoc";
-            lblsStocDisponibil.Top = 20;
-            lblsStocDisponibil.Left = lblsPret.Left + LATIME_DEFAULT - 15;
-            lblsStocDisponibil.Font = new Font("Arial", 10, FontStyle.Bold);
-            this.Controls.Add(lblsStocDisponibil);
-
-
             //adaugare control de tip label pentru 'Adaugare medicament'
             lblAdaugareMedicament = new Label();
             lblAdaugareMedicament.Width = 180;
@@ -150,7 +101,7 @@ namespace ManagerFarmacieGUI
 
             //adaugare control de tip text pentru 'NumeInput'
             txtNumeInput = new TextBox();
-            txtNumeInput.Width = LATIME_DEFAULT + 50;
+            txtNumeInput.Width = LATIME_DEFAULT + 120;
             txtNumeInput.Top = lblAdaugareMedicament.Top + 50;
             txtNumeInput.Left = lblAdaugareMedicament.Left + LATIME_DEFAULT + 20;
             this.Controls.Add(txtNumeInput);
@@ -158,30 +109,93 @@ namespace ManagerFarmacieGUI
             // adaugare control de tip label pentru 'lblDescriereInput'
             lblDescriereInput = new Label();
             lblDescriereInput.Width = LATIME_DEFAULT;
-            lblDescriereInput.Text = "Descriere medi";
+            lblDescriereInput.Text = "Categorie";
             lblDescriereInput.Top = lblNumeInput.Top + 30;
             lblDescriereInput.Left = 20;
             this.Controls.Add(lblDescriereInput);
 
-            //adaugare control de tip Text pentru 'txtDescriereInput'
-            txtDescriereInput = new TextBox();
-            txtDescriereInput.Width = LATIME_DEFAULT + 50;
-            txtDescriereInput.Top = txtNumeInput.Top + 30;
-            txtDescriereInput.Left = lblNumeInput.Left + LATIME_DEFAULT + 20;
-            this.Controls.Add(txtDescriereInput);
+            // adaugare control de tip label pentru 'lblVarstaInput'
+            lblVarstaInput = new Label();
+            lblVarstaInput.Width = LATIME_DEFAULT + 10;
+            lblVarstaInput.Text = "Recomandari";
+            lblVarstaInput.Top = lblDescriereInput.Top + LATIME_DEFAULT + 130;
+            lblVarstaInput.Left = 20;
+            this.Controls.Add(lblVarstaInput);
 
-            //adaugare control de tip label pentru 'lblPretInput'
+
+            groupBox1 = new GroupBox();
+            groupBox1.Top = lblDescriereInput.Top;
+            groupBox1.Left = lblNumeInput.Left + LATIME_DEFAULT + 20;
+            groupBox1.Height = 30 + 25 * 6;
+
+            var enumValues = Enum.GetValues(typeof(Enumerari.CategorieMedicament)).Cast<Enumerari.CategorieMedicament>();
+            int yPos = 20;
+            foreach (var value in enumValues)
+            {
+                if (value != Enumerari.CategorieMedicament.None)
+                {
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.Text = value.ToString();
+                    checkBox.Location = new System.Drawing.Point(10, yPos);
+                    checkBox.Tag = value; // Store the enum value in the Tag property
+                    Size textSize = TextRenderer.MeasureText(checkBox.Text, checkBox.Font);
+                    checkBox.Width = groupBox1.Width - 50;
+
+                    yPos += 30;
+                    groupBox1.Controls.Add(checkBox);
+                }
+                    
+            }
+
+            // Add GroupBox to the form
+            this.Controls.Add(groupBox1);
+
+            groupBox2 = new GroupBox();
+            groupBox2.Top = groupBox1.Top + 30 + groupBox1.Height;
+            groupBox2.Left = lblNumeInput.Left + LATIME_DEFAULT + 20;
+            groupBox2.Height = 30 + 25 * 4;
+
+            var enumValues2 = Enum.GetValues(typeof(Enumerari.CaracteristiciMedicament)).Cast<Enumerari.CaracteristiciMedicament>();
+            int yPoss = 20;
+            foreach (var value in enumValues2)
+            {
+                if(value != Enumerari.CaracteristiciMedicament.None)
+                {
+                    RadioButton radioButtonn = new RadioButton();
+                    radioButtonn.Text = value.ToString();
+                    radioButtonn.Location = new System.Drawing.Point(10, yPoss);
+                    radioButtonn.Tag = value; // Store the enum value in the Tag property
+                    Size textSize = TextRenderer.MeasureText(radioButtonn.Text, radioButtonn.Font);
+                    radioButtonn.Width = groupBox2.Width - 20;
+
+                    yPoss += 30;
+                    groupBox2.Controls.Add(radioButtonn);
+                }
+                
+            }
+
+            //Adauga GroupBox2
+            this.Controls.Add(groupBox2);
+
+            //adaugare control de tip ComboBox pentru 'cbVarstaInput'
+            cbVarstaInput = new RadioButton();
+            cbVarstaInput.Width = LATIME_DEFAULT + 50;
+            cbVarstaInput.Top = 15;
+            cbVarstaInput.Left = 15;
+            groupBox2.Controls.Add(cbVarstaInput);
+
+            ////adaugare control de tip label pentru 'lblPretInput'
             lblPretInput = new Label();
             lblPretInput.Width = LATIME_DEFAULT;
             lblPretInput.Text = "Pret";
-            lblPretInput.Top = lblDescriereInput.Top + 30;
+            lblPretInput.Top = groupBox2.Height+groupBox2.Top+20;
             lblPretInput.Left = 20;
             this.Controls.Add(lblPretInput);
 
-            //adaugare control de tip text pentru 'PretInput'
+            ////adaugare control de tip text pentru 'PretInput'
             txtPretInput = new TextBox();
-            txtPretInput.Width = LATIME_DEFAULT + 50;
-            txtPretInput.Top = lblDescriereInput.Top + 30;
+            txtPretInput.Width = LATIME_DEFAULT + 120;
+            txtPretInput.Top = lblDescriereInput.Top + 360;
             txtPretInput.Left = lblDescriereInput.Left + LATIME_DEFAULT + 20;
             this.Controls.Add(txtPretInput);
 
@@ -200,43 +214,17 @@ namespace ManagerFarmacieGUI
             txtStocDisponibilInput.Left = lblPretInput.Left + LATIME_DEFAULT + 20;
             this.Controls.Add(txtStocDisponibilInput);
 
-            //adaugare control de tip Button pentru 'Adauga medicament'
-            btnAdauga = new Button();
-            btnAdauga.Width = 230;
-            btnAdauga.Text = "Adauga Medicament ";
-            btnAdauga.Top = lblStocDisponibilInput.Top + 40;
-            btnAdauga.ForeColor = Color.Gray;
-            btnAdauga.Left = lblStocDisponibilInput.Left;
 
-            //adaugare label pt mesaj validare pt Nume 
-            lblNumeNou = new Label();
-            lblNumeNou.Text = "*Introduceti doar caractere";
-            lblNumeNou.TextAlign = ContentAlignment.MiddleLeft;
-            lblNumeNou.Width = 200;
-            lblNumeNou.Height = txtNumeInput.Height;
-            lblNumeNou.Left = txtNumeInput.Left + txtNumeInput.Width + 10;
-            lblNumeNou.Top = txtNumeInput.Top;
-            lblNumeNou.ForeColor = Color.Red;
-
-            //adaugare label pt mesaj validare pt Descriere 
-            lblDescriereNou = new Label();
-            lblDescriereNou.Text = "*Introduceti doar caractere";
-            lblDescriereNou.TextAlign = ContentAlignment.MiddleLeft;
-            lblDescriereNou.Width = 200;
-            lblDescriereNou.Height = txtDescriereInput.Height;
-            lblDescriereNou.Left = txtDescriereInput.Left + txtDescriereInput.Width + 10;
-            lblDescriereNou.Top = txtDescriereInput.Top;
-            lblDescriereNou.ForeColor = Color.Red;
 
             //adaugare label pt mesaj validare pt pret
-            lblPretNou = new Label();
-            lblPretNou.Text = "*Introduceti doar cifre";
-            lblPretNou.TextAlign = ContentAlignment.MiddleLeft;
-            lblPretNou.Width = 200;
-            lblPretNou.Height = txtPretInput.Height;
-            lblPretNou.Left = txtPretInput.Left + txtPretInput.Width + 10;
-            lblPretNou.Top = txtPretInput.Top;
-            lblPretNou.ForeColor = Color.Red;
+            lblpretnou = new Label();
+            lblpretnou.Text = "*introduceti doar cifre";
+            lblpretnou.TextAlign = ContentAlignment.MiddleLeft;
+            lblpretnou.Width = 200;
+            lblpretnou.Height = txtPretInput.Height;
+            lblpretnou.Left = txtPretInput.Left + txtPretInput.Width + 10;
+            lblpretnou.Top = txtPretInput.Top;
+            lblpretnou.ForeColor = Color.Red;
 
             //adaugare label pt mesaj validare pt stoc disponibil
             lblStocNou = new Label();
@@ -248,27 +236,49 @@ namespace ManagerFarmacieGUI
             lblStocNou.Top = txtStocDisponibilInput.Top;
             lblStocNou.ForeColor = Color.Red;
 
+
+            //adaugare control de tip Button pentru 'Adauga medicament'
+            btnAdauga = new Button();
+            btnAdauga.Width = 230;
+            btnAdauga.Text = "Adauga Medicament ";
+            btnAdauga.Top = txtStocDisponibilInput.Top + 40;
+            btnAdauga.ForeColor = Color.Gray;
+            btnAdauga.Left = lblPretInput.Left;
+            btnAdauga.Width = lblPretInput.Width + groupBox2.Width + 20;
+
+            //adaugare label pt mesaj validare pt Nume 
+            lblNumeNou = new Label();
+            lblNumeNou.Text = "*Introduceti doar caractere";
+            lblNumeNou.TextAlign = ContentAlignment.MiddleLeft;
+            lblNumeNou.Width = 200;
+            lblNumeNou.Height = txtNumeInput.Height;
+            lblNumeNou.Left = txtNumeInput.Left + txtNumeInput.Width + 10;
+            lblNumeNou.Top = txtNumeInput.Top;
+            lblNumeNou.ForeColor = Color.Red;
+
+
             //
             lblNumeMedicamentNou = new Label();
             lblNumeMedicamentNou.Text = "*Medicament deja introdus";
             lblNumeMedicamentNou.TextAlign = ContentAlignment.MiddleLeft;
             lblNumeMedicamentNou.Width = 210;
             lblNumeMedicamentNou.Height = lblNumeNou.Height;
-            lblNumeMedicamentNou.Left = lblNumeNou.Left ;
+            lblNumeMedicamentNou.Left = lblNumeNou.Left;
             lblNumeMedicamentNou.Top = lblNumeNou.Top;
             lblNumeMedicamentNou.ForeColor = Color.Red;
+
 
             btnAdauga.Click += onButtonClicked;
             btnAdauga.Click += Form1_Load;
 
             this.Controls.Add(btnAdauga);
+            this.Controls.Add(groupBox1);
+            this.Controls.Add(groupBox2);
 
 
             txtNumeInput.GotFocus += new EventHandler(txtNumeInput_GetFocus);
             txtNumeInput.LostFocus += new EventHandler(txtNumeInput_LostFocus);
 
-            txtDescriereInput.GotFocus += new EventHandler(txtDescriereInput_GetFocus);
-            txtDescriereInput.LostFocus += new EventHandler(txtDescriereInput_LostFocus);
 
             txtPretInput.GotFocus += new EventHandler(txtPretInput_GetFocus);
             txtPretInput.LostFocus += new EventHandler(txtPretInput_LostFocus);
@@ -282,20 +292,66 @@ namespace ManagerFarmacieGUI
         {
             if (ValidareDate())
             {
-                ultimulId++;
-                Medicament medicament = new Medicament(ultimulId, txtNumeInput.Text, txtDescriereInput.Text, Convert.ToDecimal(txtPretInput.Text), Convert.ToInt32(txtStocDisponibilInput.Text));
-                adminMedicament.AddMedicament(medicament);
-               
+                selectedEnums.Clear();
 
+                ultimulId++;
+                
+
+                foreach (Control control in groupBox1.Controls)
+                {
+                    if (control is CheckBox checkBox && checkBox.Checked)
+                    {
+                        if (checkBox.Tag is Enumerari.CategorieMedicament enumValue)
+                        {
+                            selectedEnums.Add(enumValue);
+                            
+                        }
+                    }
+                }
+                
+
+                foreach (Control control in groupBox2.Controls)
+                {
+                    if (control is RadioButton radioButton && radioButton.Checked)
+                    {
+                        if (radioButton.Tag is Enumerari.CaracteristiciMedicament enumValue)
+                        {
+                            selectedEnum = enumValue;
+                            break;
+                        }
+                    }
+                }
+                
+                Enumerari.CategorieMedicament[] selectedEnumArray = selectedEnums.ToArray();
+                Console.WriteLine(selectedEnumArray);
+                Medicament medicament = new Medicament(ultimulId, txtNumeInput.Text, Convert.ToDecimal(txtPretInput.Text), Convert.ToInt32(txtStocDisponibilInput.Text), selectedEnumArray, selectedEnum);
+                adminMedicament.AddMedicament(medicament);
+                Array.Clear(selectedEnumArray, 0, selectedEnumArray.Length);
+                
             }
-            
+            txtNumeInput.Clear();
+            txtPretInput.Clear();
+            txtStocDisponibilInput.Clear();
+            foreach (Control control in groupBox1.Controls)
+            {
+                if (control is CheckBox checkBox && checkBox.Checked)
+                {
+                    checkBox.Checked = false;
+                }
+            }
+            foreach (Control control in groupBox2.Controls)
+            {
+                if (control is RadioButton radioButton && radioButton.Checked)
+                {
+                    radioButton.Checked = false;
+                }
+            }
+
             
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-          
-            AfiseazaMedicamente();
             //ultimulId = medicamente
         }
 
@@ -309,17 +365,6 @@ namespace ManagerFarmacieGUI
             txtNumeInput.BackColor = SystemColors.Window;
         }
 
-        private void txtDescriereInput_GetFocus(object sender, EventArgs e)
-        {
-            txtDescriereInput.BackColor = Color.LightBlue;
-
-        }
-
-        private void txtDescriereInput_LostFocus(object sender, EventArgs e)
-        {
-            txtDescriereInput.BackColor = SystemColors.Window;
-
-        }
 
         private void txtPretInput_GetFocus(object sender, EventArgs e)
         {
@@ -385,21 +430,6 @@ namespace ManagerFarmacieGUI
 
             }
             //this.Refresh();
-            // Validare Descriere
-            
-            if (string.IsNullOrEmpty(txtDescriereInput.Text) || !VerificaCaractere(txtDescriereInput.Text))
-            {
-                dateValide = false;
-                lblDescriereInput.ForeColor = Color.Red;
-                this.Controls.Add(lblDescriereNou);
-            }
-            else
-            {
-                lblDescriereInput.ForeColor = Color.DarkCyan;
-                Controls.Remove(lblDescriereNou);
-
-            }
-            //this.Refresh();
 
             // Validare Pret
             decimal pret;
@@ -408,12 +438,12 @@ namespace ManagerFarmacieGUI
             {
                 dateValide = false;
                 lblPretInput.ForeColor = Color.Red;    
-                Controls.Add(lblPretNou);
+                Controls.Add(lblpretnou);
             }
             else
             {
                 lblPretInput.ForeColor = Color.DarkCyan;
-                Controls.Remove(lblPretNou);
+                Controls.Remove(lblpretnou);
             }
             //this.Refresh();
 
@@ -431,7 +461,38 @@ namespace ManagerFarmacieGUI
                  lblStocDisponibilInput.ForeColor = Color.DarkCyan;
                  Controls.Remove(lblStocNou);
             }
-           
+            foreach (Control control in groupBox1.Controls)
+            {
+                if (control is CheckBox checkBox && checkBox.Checked)
+                {
+                    if (checkBox.Tag is Enumerari.CategorieMedicament enumValue)
+                    {
+                        selectedEnums.Add(enumValue);
+                    }
+                }
+            }
+            if (selectedEnums.Count == 0)
+            {
+                lblDescriereInput.ForeColor = Color.Red;
+            }
+
+
+            foreach (Control control in groupBox2.Controls)
+            {
+                if (control is RadioButton radioButton && radioButton.Checked)
+                {
+                    if (radioButton.Tag is Enumerari.CaracteristiciMedicament enumValue)
+                    {
+                        selectedEnum = enumValue;
+                        break;
+                    }
+                }
+            }
+            if (selectedEnum == Enumerari.CaracteristiciMedicament.None)
+            {
+                lblVarstaInput.ForeColor = Color.Red;
+            }
+
             //this.Refresh();
             return dateValide;
         }
@@ -460,68 +521,5 @@ namespace ManagerFarmacieGUI
             return true;
         }
 
-        private void AfiseazaMedicamente()
-        {
-            Medicament[] medicamente = adminMedicament.GetMedicamente(out int nrMedicamente);
-            ultimulId = medicamente.Length;
-            lblID = new Label[nrMedicamente];
-            lblNume = new Label[nrMedicamente];
-            lblPret = new Label[nrMedicamente];
-            lblStocDisponibil = new Label[nrMedicamente];
-            lblDescriere = new Label[nrMedicamente];
-
-            int i = 0;
-            foreach (Medicament medicament in medicamente)
-            {
-                //adaugare control de tip label pentru 'ID'
-
-                lblID[i] = new Label();
-                lblID[i].Width = LATIME_DEFAULT - 40;
-                lblID[i].Top = lblsID.Top + 30*(i + 1);
-                lblID[i].Left = 460;
-                //lblID[i].BackColor = Color.Gray;
-                lblID[i].Text = Convert.ToString(medicament.Id);
-                this.Controls.Add(lblID[i]);
-
-                //adaugare control de tip label pentru 'Nume'
-                lblNume[i] = new Label();
-                lblNume[i].Width = LATIME_DEFAULT + 50;
-                lblNume[i].Top = lblsNume.Top+30 * (i + 1);
-                lblNume[i].Left = lblID[i].Left + LATIME_DEFAULT - 30;
-                lblNume[i].Text = medicament.Nume;
-                //lblNume[i].BackColor = Color.Gray;
-                this.Controls.Add(lblNume[i]);
-
-                //adaugare control de tip label pentru 'Descriere'
-                lblDescriere[i] = new Label();
-                lblDescriere[i].Width = LATIME_DEFAULT + 60;
-                lblDescriere[i].Top = lblsDescriere.Top + 30 * (i + 1);
-                lblDescriere[i].Left = lblNume[i].Left + LATIME_DEFAULT + 60;
-                //lblDescriere[i].BackColor = Color.Gray;
-                lblDescriere[i].Text = medicament.Descriere;
-                this.Controls.Add(lblDescriere[i]);
-
-                //adaugare control de tip label pentru 'Pret'
-                lblPret[i] = new Label();
-                lblPret[i].Width = LATIME_DEFAULT - 20;
-                lblPret[i].Top = lblsPret.Top + 30 * (i + 1);
-                lblPret[i].Left = lblDescriere[i].Left + LATIME_DEFAULT + 70;
-                //lblPret[i].BackColor = Color.Gray;
-                lblPret[i].Text = Convert.ToString(medicament.Pret);
-                this.Controls.Add(lblPret[i]);
-
-                //adaugare control de tip label pentru 'Stoc Disponibil'
-                lblStocDisponibil[i] = new Label();
-                lblStocDisponibil[i].Width = LATIME_DEFAULT;
-                lblStocDisponibil[i].Top = lblsStocDisponibil.Top+30 * (i + 1);
-                lblStocDisponibil[i].Left = lblPret[i].Left + LATIME_DEFAULT - 15;
-               //lblStocDisponibil[i].BackColor = Color.Gray;
-                lblStocDisponibil[i].Text =Convert.ToString(medicament.StocDisponibil);
-                this.Controls.Add(lblStocDisponibil[i]);
-                i++;
-            }
-
-
-        }
     }
 }

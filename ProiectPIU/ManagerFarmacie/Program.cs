@@ -1,9 +1,13 @@
 ﻿using System;
 using ManagerFisier;
 using System.Configuration;
+using Clase;
+using static Clase.Enumerari;
+using System.Collections.Generic;
 
 class Program
 {
+
     static void Main(string[] args)
     {
         //TEMA LABORATOR 3 SI LABORATOR 4
@@ -14,7 +18,6 @@ class Program
         // astfel incat datele din fisier sa poata fi utilizate si de alte proiecte
         string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
 
-        string fisier = "C:\\Users\\x\\Desktop\\ProiectPIU\\ProiectPIU";
         Medicament[] inventarMedicamente = new Medicament[10]; // Vector pentru stocarea medicamentelor
         Vanzare[] listaVanzari = new Vanzare[10]; // Vector pentru stocarea vânzărilor
         AdministrareMedicamente_FisierText managerFisier = new AdministrareMedicamente_FisierText(caleCompletaFisier);
@@ -91,27 +94,86 @@ class Program
         int id = Convert.ToInt32(Console.ReadLine());
         Console.Write("Nume: ");
         string nume = Console.ReadLine();
-        Console.Write("Descriere: ");
-        string descriere = Console.ReadLine();
+
+        // Display categories
+        Console.WriteLine("Alegeti categoriile pentru medicament (separate prin virgula): ");
+        Console.WriteLine("1 - DurereSiFebra");
+        Console.WriteLine("2 - Antibiotice");
+        Console.WriteLine("3 - Alergii");
+        Console.WriteLine("4 - Digestie");
+        Console.WriteLine("5 - RacealaSiGripa");
+
+        // Read user input for categories
+        string inputCategories = Console.ReadLine();
+        string[] categoryNumbers = inputCategories.Split(',');
+
+        // Create a list to store selected categories
+        List<CategorieMedicament> selectedCategories = new List<CategorieMedicament>();
+
+        // Convert user input to category enum values
+        foreach (string categoryNumber in categoryNumbers)
+        {
+            if (Enum.TryParse<CategorieMedicament>(categoryNumber, out CategorieMedicament category))
+            {
+                selectedCategories.Add(category);
+            }
+            else
+            {
+                Console.WriteLine($"Invalid category number: {categoryNumber}");
+            }
+        }
+
+        // Output selected categories
+        Console.WriteLine("Categoriile selectate:");
+        foreach (var category in selectedCategories)
+        {
+            Console.WriteLine(category);
+        }
+
+        // Selectarea categoriei de vârstă
+        Console.WriteLine("Alegeti o categorie de varsta: ");
+        Console.WriteLine("1 - Recomandat pentru copii");
+        Console.WriteLine("2 - Recomandat pentru adulti");
+        Console.WriteLine("3 - Recomandat pentru ambele");
+        int optiuneVarsta = Convert.ToInt32(Console.ReadLine());
+        Clase.Enumerari.CaracteristiciMedicament caracteristica;
+        switch (optiuneVarsta)
+        {
+            case 1:
+                caracteristica = Enumerari.CaracteristiciMedicament.RecomandatPentruCopii;
+                break;
+            case 2:
+                caracteristica = Enumerari.CaracteristiciMedicament.RecomamdatPentruAdulti;
+                break;
+            case 3:
+                caracteristica = Enumerari.CaracteristiciMedicament.RecomandatPentruAmbii;
+                break;
+            default:
+                Console.WriteLine("Optiune invalida pentru categoria de varsta!");
+                return null; // Ieșiți din metoda dacă opțiunea este invalidă
+        }
+
         Console.Write("Pret: ");
         decimal pret = Convert.ToDecimal(Console.ReadLine());
         Console.Write("Stoc disponibil: ");
         int stoc = Convert.ToInt32(Console.ReadLine());
+
         Medicament medicamentOut = new Medicament();
         int index = GasesteIndexLiber(inventarMedicamente);
         if (index != -1)
         {
-            Medicament medicament = new Medicament(id, nume, descriere, pret, stoc);
-            medicamentOut.copyMedicament(medicament);
+            Medicament medicament = new Medicament(id, nume, pret, stoc, selectedCategories.ToArray(), caracteristica);
+            medicamentOut.CopyMedicament(medicament);
             inventarMedicamente[index] = medicament;
         }
         else
         {
-            Console.WriteLine("Nu mai este spațiu în stoc pentru a adăuga medicamente noi!");
+            Console.WriteLine("Nu mai este spatiu in stoc pentru a adauga medicamente noi!");
         }
 
         return medicamentOut;
     }
+
 
     static int GasesteIndexLiber<T>(T[] listaObiecte)
     {

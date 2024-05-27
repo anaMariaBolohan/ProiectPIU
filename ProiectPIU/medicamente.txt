@@ -1,4 +1,27 @@
-1$nurofen$durere$35$100
-2$Paracetamol$durere$7$150
-3$Biomicin Forte$Antibiotic$23$68
-4$Decasept$infectie gat$13$56
+1$1$3$1$1$2
+0$Ana$12$112$1;2;3$1
+0$123$1$1$1;1;1;2$1
+2$123$1$1$1$1
+1$asdfa$1$3$2;2$1
+1$Nurofen$25$50$1;1$3
+1$Paracetamol$5$39$1;1$3
+1$Paduden$17$67$1;4;1;4$1
+1$frtfth$46575$56$2;2$2
+0$Claritine$30$12$3$3
+0$Sirop$200$70$4$1
+0$dbsds$60$10$4$1
+0$shwjns$220$12$2$1
+0$ xfs$580$11$4$3
+0$ xfsrte$580$11$1;2;3$3
+1$dbs bsd$56$321$1;2;1;2$2
+1$rsbfsb$12$343$2;2$1
+2$asada$123$4$2;2;2;3;1;1$2
+3$fds$21$4$2;2;2;3;1;1;2;2$2
+1$fsdds$25$2$4;4$1
+2$fsd$3$5$4;4;4;4;4$1
+1$digestControl$12$80$4;4$1
+1$tjrnr$12$20$3;3$2
+1$fsdfas$123$3$1;1$1
+1$fdsgfa$213$5$2;1;1$1
+1$jgkhjk$1234$56$1$3
+2$hgfhsfv$123$6$4$2

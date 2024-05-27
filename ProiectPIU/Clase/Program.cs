@@ -1,82 +1,86 @@
-﻿using System;
+﻿using Clase;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using static Clase.Enumerari;
 //TEMA LABORATOR 2
 public class Medicament
 {
-    //TEMA LABORATOR 3 (Proprietati auto-implemented)
+    // Properties
     public int Id { get; set; }
     public string Nume { get; set; }
-    public string Descriere { get; set; }
     public decimal Pret { get; set; }
     public int StocDisponibil { get; set; }
+    public CategorieMedicament[] Categorie { get; set; }
+    public CaracteristiciMedicament Caracteristici { get; set; }
 
-    //constante
+    // Constants
     private const char SEPARATOR_PRINCIPAL_FISIER = '$';
-    private const char SEPARATOR_SECUNDAR_FISIER = ' ';
+    private const char SEPARATOR_SECUNDAR_FISIER = ';';
     private const bool SUCCES = true;
-    
-    private const int ID = 0;
-    private const int NUME = 1;
-    private const int DESCRIERE = 2;
-    private const int PRET = 3;
-    private const int STOCDISPONIBIL = 4;
-    public Medicament(int id, string nume, string descriere, decimal pret, int stocDisponibil)
+
+    // Constructor
+    public Medicament(int id, string nume, decimal pret, int stocDisponibil, CategorieMedicament[] categorie, CaracteristiciMedicament caracteristici)
     {
         Id = id;
         Nume = nume;
-        Descriere = descriere;
         Pret = pret;
         StocDisponibil = stocDisponibil;
+        Categorie = categorie;
+        Caracteristici = caracteristici;
     }
 
+    // File conversion method
     public string ConversieLaSir_PentruFisier()
     {
-        string obiectMedicamentPentruFisier = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}{5}",
-            SEPARATOR_PRINCIPAL_FISIER,
-            Id.ToString(),
-            (Nume ?? " NECUNOSCUT "),
-            (Descriere ?? " NECUNOSCUT "),
-            (Pret.ToString() ?? " NECUNOSCUT "),
-            (StocDisponibil.ToString() ?? " NECUNOSCUT ")
-            );
+        string categoriiString = string.Join(";", Array.ConvertAll(Categorie, x => ((int)x).ToString()));
 
-        return obiectMedicamentPentruFisier;
+        return string.Join(SEPARATOR_PRINCIPAL_FISIER.ToString(), Id, Nume ?? "NECUNOSCUT", Pret, StocDisponibil, categoriiString, (int)Caracteristici);
     }
 
+    // Constructor for file reading
     public Medicament(string linieFisier)
     {
         string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
-
-        //ordinea de preluare a campurilor este data de ordinea in care au fost scrise in fisier prin apelul implicit al metodei ConversieLaSir_PentruFisier()
-        this.Id = Convert.ToInt32(dateFisier[ID]);
-        this.Nume = dateFisier[NUME];
-        this.Descriere = dateFisier[DESCRIERE];
-        this.Pret = Convert.ToInt32(dateFisier[PRET]);
-        this.StocDisponibil = Convert.ToInt32(dateFisier[STOCDISPONIBIL]);
+        Id = Convert.ToInt32(dateFisier[0]);
+        Nume = dateFisier[1];
+        Pret = Convert.ToDecimal(dateFisier[2]);
+        StocDisponibil = Convert.ToInt32(dateFisier[3]);
+        string[] categorieTokens = dateFisier[4].Split(SEPARATOR_SECUNDAR_FISIER);
+        Categorie = Array.ConvertAll(categorieTokens, x => (CategorieMedicament)Convert.ToInt32(x));
+        Caracteristici = (CaracteristiciMedicament)Convert.ToInt32(dateFisier[5]);
     }
 
-    public void copyMedicament(Medicament medicament)
+    // Copy method
+    public void CopyMedicament(Medicament medicament)
     {
-        this.Id = medicament.Id;
-        this.Nume = medicament.Nume;
-        this.Descriere = medicament.Descriere;
-        this.Pret = medicament.Pret;
-        this.StocDisponibil = medicament.StocDisponibil;
-
+        Id = medicament.Id;
+        Nume = medicament.Nume;
+        Pret = medicament.Pret;
+        StocDisponibil = medicament.StocDisponibil;
+        Categorie = medicament.Categorie;
+        Caracteristici = medicament.Caracteristici;
     }
+
+    // Empty constructor
     public Medicament()
     {
-        this.Id = 0;
-        this.Nume = string.Empty;
-        this.Descriere = string.Empty;
-        this.Pret = 0;
-        this.StocDisponibil = 0;
+        Id = 0;
+        Nume = string.Empty;
+        Pret = 0;
+        StocDisponibil = 0;
+        Categorie = new CategorieMedicament[0]; // Initialize with an empty array
+        Caracteristici = 0;
     }
 
-        public void AfiseazaDetalii()
+    // Method to display details
+    public void AfiseazaDetalii()
     {
-        Console.WriteLine($"ID: {Id}, Nume: {Nume}, Descriere: {Descriere}, Pret: {Pret}, Stoc disponibil: {StocDisponibil}");
+        string categoriiString = string.Join(", ", Array.ConvertAll(Categorie, x => x.ToString()));
+        Console.WriteLine($"ID: {Id}, Nume: {Nume}, Pret: {Pret}, Stoc disponibil: {StocDisponibil}, Categorie: {categoriiString}, Varsta: {Caracteristici}");
     }
 }
+
 
 public class Vanzare
 {

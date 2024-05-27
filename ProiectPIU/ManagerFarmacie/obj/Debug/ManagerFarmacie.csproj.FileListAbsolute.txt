@@ -33,3 +33,17 @@ C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmac
 C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.csproj.CopyComplete
 C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.exe
 C:\Users\x\Desktop\ProiectPIU\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.pdb
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\ManagerFarmacie.exe.config
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\ManagerFarmacie.exe
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\ManagerFarmacie.pdb
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\Clase.dll
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\ManagerFisier.dll
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\Clase.pdb
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\Clase.dll.config
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\ManagerFisier.pdb
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\bin\Debug\ManagerFisier.dll.config
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.csproj.AssemblyReference.cache
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.csproj.CoreCompileInputs.cache
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.csproj.CopyComplete
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.exe
+C:\Users\x\Downloads\ProiectPIU-main\ProiectPIU\ManagerFarmacie\obj\Debug\ManagerFarmacie.pdb

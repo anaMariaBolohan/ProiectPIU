@@ -47,11 +47,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModificaMedicament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificaMedicament.Designer.cs">
+      <DependentUpon>ModificaMedicament.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VizualizareStoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VizualizareStoc.Designer.cs">
+      <DependentUpon>VizualizareStoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAdaugaMedicament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdaugaMedicament.Designer.cs">
+      <DependentUpon>FormAdaugaMedicament.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
